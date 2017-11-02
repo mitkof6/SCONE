@@ -37,11 +37,11 @@ namespace scone
 				auto trg = GetMirroredStateNameAndSign( name );
 				Index trg_idx = FindIndex( state.GetNames(), trg.first );
 				SCONE_ASSERT( trg_idx != NoIndex ); // make sure the target state name exists
-				diff = abs( m_InitState[ idx ] - trg.second * state[ trg_idx ] );
+				diff = std::abs( m_InitState[ idx ] - trg.second * state[ trg_idx ] );
 			}
 			else
 			{
-				diff = abs( m_InitState[ idx ] - state[ idx ] );
+				diff = std::abs( m_InitState[ idx ] - state[ idx ] );
 			}
 
 			total_diff += diff * diff;

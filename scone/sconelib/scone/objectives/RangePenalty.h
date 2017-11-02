@@ -22,7 +22,7 @@ namespace scone
 		void AddSample( TimeInSeconds timestamp, const T& value )
 		{
 			auto range_violation = range.GetRangeViolation( value );
-			auto pen = abs_range_penalty * abs( range_violation ) + squared_range_penalty * GetSquared( range_violation );
+			auto pen = abs_range_penalty * std::abs( range_violation ) + squared_range_penalty * GetSquared( range_violation );
 			penalty.AddSample( timestamp, pen );
 		}
 

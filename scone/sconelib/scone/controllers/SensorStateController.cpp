@@ -64,7 +64,7 @@ namespace scone
 		ld = leg.GetLoad() - other_leg.GetLoad();
 		sd = leg.GetRelFootPos().x - other_leg.GetRelFootPos().x;
 
-		double dist = abs( load_delta - ld ) + abs( sag_delta - sd );
+		double dist = std::abs( load_delta - ld ) + std::abs( sag_delta - sd );
 		return dist;
 	}
 

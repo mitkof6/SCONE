@@ -66,7 +66,7 @@ namespace scone
 			{
 				double lf = l.dof.GetLimitForce();
 				double fps = l.squared_force_penalty * GetSquared( lf );
-				double fpa = l.abs_force_penalty * abs( lf );
+				double fpa = l.abs_force_penalty * std::abs( lf );
 				l.penalty.AddSample( timestamp, fps + fpa );
 			}
 		}
