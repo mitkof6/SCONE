@@ -463,7 +463,10 @@ namespace scone
 					// This is an optimization that only works when there are only muscles
 					// OpenSim: addInControls is rather inefficient, that's why we don't use it
 					// TODO: fix this into a generic version (i.e. work with other actuators)
-					controls[ idx++ ] += mus->GetInput();
+					double u_clamped = mus->GetInput();
+					if ( u_clamped < mus->GetMinControl() ) u_clamped = mus->GetMinControl();
+					else if ( u_clamped > mus->GetMaxControl() ) u_clamped = mus->GetMaxControl();
+					controls[ idx++ ] += u_clamped;
 				}
 			}
 		}

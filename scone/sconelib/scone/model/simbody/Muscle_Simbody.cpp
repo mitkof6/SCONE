@@ -175,12 +175,12 @@ namespace scone
 	{
 		// use our own control value, as OpenSim calls getControls()
 		// this could lead to infinite recursion
-		double u = GetInput();
+		double u = GetInput();	
 
 		// since the control value is internal, the actual excitation may be
 		// incorrect. make sure to clamp it for calls (important for metabolics)
-		if ( u < 0.0 ) u = 0.0;
-		if ( u > 1.0 ) u = 1.0;
+		if ( u < GetMinControl() ) u = GetMinControl();
+		else if ( u > GetMaxControl() ) u = GetMaxControl();
 
 		return u;
 	}
@@ -189,4 +189,15 @@ namespace scone
 	{
 		m_osMus.setExcitation( m_Model.GetTkState(), u );
 	}
+
+	const Real scone::Muscle_Simbody::GetMinControl() const
+	{
+		return m_osMus.getMinControl();
+	}
+
+	const Real scone::Muscle_Simbody::GetMaxControl() const
+	{
+		return m_osMus.getMaxControl();
+	}
+
 }
