@@ -139,6 +139,8 @@ namespace scone
 
 	String GetSconeBuildNumber()
 	{
+return "1";
+/*
 		if ( g_Version.empty() )
 		{
 			boost::filesystem::path versionpath( GetApplicationFolder() );
@@ -161,6 +163,6 @@ namespace scone
 				g_Version = "UNKNOWN"; // reading has failed, version unknown
 		}
 
-		return g_Version;
+		return g_Version;*/
 	}
 }

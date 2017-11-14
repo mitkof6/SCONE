@@ -133,11 +133,13 @@ namespace scone
 	void Optimizer::InitOutputFolder()
 	{
 		auto output_base = ( GetFolder( SCONE_RESULTS_FOLDER ) / GetSignature() ).str();
+std::cout << "DEBUGoutputbase " << output_base << std::endl;
 		m_OutputFolder = output_base;
 
-		for ( int i = 1; bfs::exists( bfs::path( m_OutputFolder ) ); ++i )
-			m_OutputFolder = output_base + stringf( " (%d)", i );
+//		for ( int i = 1; bfs::exists( bfs::path( m_OutputFolder ) ); ++i )
+//			m_OutputFolder = output_base + stringf( " (%d)", i );
 
+std::cout << "DEBUG_OutputFolder " << m_OutputFolder << std::endl;
 		create_directories( bfs::path( m_OutputFolder ) );
 		m_OutputFolder += "/";
 	}
