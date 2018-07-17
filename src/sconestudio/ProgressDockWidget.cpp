@@ -68,8 +68,8 @@ state( StartingState )
 	//opt.ui.plot->graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 5));
 
 	ui.plot->xAxis->setRange( 0, 8 );
-	ui.plot->xAxis->setAutoTickCount( 7 );
-	ui.plot->yAxis->setAutoTickCount( 3 );
+	//QCP2 ui.plot->xAxis->setAutoTickCount( 7 );
+	//QCP2 ui.plot->yAxis->setAutoTickCount( 3 );
 	ui.plot->replot();
 	ui.plot->hide();
 
@@ -151,12 +151,13 @@ ProgressDockWidget::UpdateResult ProgressDockWidget::updateProgress()
 
 			ui.plot->graph( 0 )->setData( genvec, bestvec );
 			ui.plot->graph( 1 )->setData( genvec, avgvec );
-			ui.plot->graph( 2 )->clearData();
+			//QCP2 ui.plot->graph( 2 )->clearData();
+
 			auto start = std::max( 0, generation - window_size );
 			ui.plot->graph( 2 )->addData( start, cur_reg( start ) );
 			ui.plot->graph( 2 )->addData( generation, cur_reg( float( generation ) ) );
 			ui.plot->xAxis->setRange( 0, std::max( 8, generation ) );
-			ui.plot->xAxis->setAutoTickCount( 7 );
+			//QCP2 ui.plot->xAxis->setAutoTickCount( 7 );
 
 			ui.plot->yAxis->setRange( lowest, highest );
 			ui.plot->replot();
