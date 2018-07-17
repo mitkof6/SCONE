@@ -7543,7 +7543,7 @@ QCPAxis::QCPAxis(QCPAxisRect *parent, AxisType type) :
   // internal members:
   mGrid(new QCPGrid(this)),
   mAxisPainter(new QCPAxisPainterPrivate(parent->parentPlot())),
-  mTicker(new QCPAxisTicker),
+  mTicker(new QCPAxisTicker()), //TG
   mCachedMarginValid(false),
   mCachedMargin(0)
 {
@@ -9514,7 +9514,7 @@ void QCPAxisPainterPrivate::placeTickLabel(QCPPainter *painter, double position,
     CachedLabel *cachedLabel = mLabelCache.take(text); // attempt to get label from cache
     if (!cachedLabel)  // no cached label existed, create it
     {
-      cachedLabel = new CachedLabel;
+      cachedLabel = new CachedLabel(); //TG
       TickLabelData labelData = getTickLabelData(painter->font(), text);
       cachedLabel->offset = getTickLabelDrawOffset(labelData)+labelData.rotatedTotalBounds.topLeft();
       if (!qFuzzyCompare(1.0, mParentPlot->bufferDevicePixelRatio()))
@@ -10716,7 +10716,7 @@ QCPAbstractPlottable::QCPAbstractPlottable(QCPAxis *keyAxis, QCPAxis *valueAxis)
     qDebug() << Q_FUNC_INFO << "keyAxis and valueAxis must be orthogonal to each other.";
   
   mParentPlot->registerPlottable(this);
-  setSelectionDecorator(new QCPSelectionDecorator);
+  setSelectionDecorator(new QCPSelectionDecorator()); //TG
 }
 
 QCPAbstractPlottable::~QCPAbstractPlottable()
@@ -12918,7 +12918,7 @@ QCustomPlot::QCustomPlot(QWidget *parent) :
   layer(QLatin1String("overlay"))->setMode(QCPLayer::lmBuffered);
   
   // create initial layout, axis rect and legend:
-  mPlotLayout = new QCPLayoutGrid;
+  mPlotLayout = new QCPLayoutGrid(); //TG
   mPlotLayout->initializeParentPlot(this);
   mPlotLayout->setParent(this); // important because if parent is QWidget, QCPLayout::sizeConstraintsChanged will call QWidget::updateGeometry
   mPlotLayout->setLayer(QLatin1String("main"));
@@ -12928,7 +12928,7 @@ QCustomPlot::QCustomPlot(QWidget *parent) :
   yAxis = defaultAxisRect->axis(QCPAxis::atLeft);
   xAxis2 = defaultAxisRect->axis(QCPAxis::atTop);
   yAxis2 = defaultAxisRect->axis(QCPAxis::atRight);
-  legend = new QCPLegend;
+  legend = new QCPLegend(); //TG
   legend->setVisible(false);
   defaultAxisRect->insetLayout()->addElement(legend, Qt::AlignRight|Qt::AlignTop);
   defaultAxisRect->insetLayout()->setMargins(QMargins(12, 12, 12, 12));
@@ -16821,7 +16821,7 @@ QCPAxisRect::QCPAxisRect(QCustomPlot *parentPlot, bool setupDefaultAxes) :
   mBackgroundBrush(Qt::NoBrush),
   mBackgroundScaled(true),
   mBackgroundScaledMode(Qt::KeepAspectRatioByExpanding),
-  mInsetLayout(new QCPLayoutInset),
+  mInsetLayout(new QCPLayoutInset()), //TG
   mRangeDrag(Qt::Horizontal|Qt::Vertical),
   mRangeZoom(Qt::Horizontal|Qt::Vertical),
   mRangeZoomFactorHorz(0.85),
@@ -27201,7 +27201,7 @@ QCPErrorBarsData::QCPErrorBarsData(double errorMinus, double errorPlus) :
 */
 QCPErrorBars::QCPErrorBars(QCPAxis *keyAxis, QCPAxis *valueAxis) :
   QCPAbstractPlottable(keyAxis, valueAxis),
-  mDataContainer(new QVector<QCPErrorBarsData>),
+  mDataContainer(new QVector<QCPErrorBarsData>()), //TG
   mErrorType(etValueError),
   mWhiskerWidth(9),
   mSymbolGap(10)
